@@ -11,21 +11,21 @@ next_page: [/guide/intro/chapter-2, Opening A Window]
   <p></p>
   <ol id="toc">
     <!--
-            To be filled by javascript
-            -->
+      To be filled by javascript
+    -->
   </ol>
 
   <h2><a id="introduction" class="js">Introduction</a></h2>
   <p>
     It's time to get started on your pygame journey, but what is pygame? Well
     pygame is "a free and open-source cross-platform library for the development
-    of multimedia applications like video games using Python". As the
+    of multimedia applications like video games using Python"(<a href="https://github.com/pygame-community/pygame-ce?tab=readme-ov-file">pygame-ce github repository</a>). As the
     description suggests, it's mostly used to make video games - which is why in
     this book we'll be learning techniques relevant to making games
   </p>
 
   <p>
-    Pygame provides the very basic utility to draw and manipulate pixels on to
+    Pygame aims to be a user-friendly library to draw and manipulate pixels onto
     the screen, much like <a href="https://www.libsdl.org/">SDL2</a>, but with
     extended features in various forms that makes it easier to use. Given this
     nature, you generally have a lot of control on how you want your code to
@@ -36,7 +36,9 @@ next_page: [/guide/intro/chapter-2, Opening A Window]
 
   <p>
     In this book we'll aim to cover how to do basic things with pygame, with
-    little exercises in between to make sure you're not falling off, goodluck
+    little exercises in between to make sure you're not falling off
+    
+    Good Luck!
   </p>
 
   <h2><a id="pygame-ce" class="js">Pygame-CE</a></h2>
@@ -46,11 +48,10 @@ next_page: [/guide/intro/chapter-2, Opening A Window]
     in this case they branched off to be two completely separate packages now.
   </p>
   <p>
-    <a href="https://github.com/pygame-community/pygame-ce">pygame-ce</a> is the
+    <a href="https://github.com/pygame-community/pygame-ce">pygame-ce</a> is a 
     fork of the original pygame, which got created due to all the active
-    developers of the original project being banned by the "owner". Well,
-    pygame-ce has no "owner", it follows a more democratic approach to managing
-    itself now.
+    developers of the original project being banned by the "owner". The fork is not owned
+    by any one person and follows a more democratic model to its management
   </p>
   <p>
     So what happened to all the active developers of the original pygame? They
@@ -62,19 +63,17 @@ next_page: [/guide/intro/chapter-2, Opening A Window]
   <p>
     For all sane purposes, we will be using <code>pygame-ce</code> in this book
     and we advise the same. It has had more performance improvements, code
-    features, and active development than the original pygame for a while now. It
-    is recommended to use only <code>pygame-ce</code> from now onwards by most
-    Python communities.
+    features, and active development than the original pygame for a while now. 
   </p>
 
   <h2><a id="installation" class="js">Installation</a></h2>
   <p>
     Now that you know what pygame-ce is, let's install it.  
 
-{% highlight python %}
-pip uninstall pygame
-pip install pygame-ce
-{% endhighlight %}
+<pre>
+  pip uninstall pygame
+  pip install pygame-ce
+</pre>
     In order for pygame-ce to work, pygame needs to be uninstalled first. 
     This is because both upstream pygame and pygame-ce share the import name, 
     and so upstream pygame must be removed <u>first</u>.
