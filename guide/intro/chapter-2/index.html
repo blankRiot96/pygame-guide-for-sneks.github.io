@@ -85,8 +85,7 @@ while True:
       So any keypress, mouse input or touch input was recorded here.
       <br>
       <br>In this case, we want to loop over these events and check if the user pressed the X button.
-      More precisely, this checks for the <a href="https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html#index-SIGTERM">SIGTERM</a>
-      signal from your operating system which is what the X button sends
+      <code>pygame.QUIT</code> is sent when the user closes the window
 {% highlight python %}
 import pygame
 
