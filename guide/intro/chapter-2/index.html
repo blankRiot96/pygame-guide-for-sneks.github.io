@@ -1,0 +1,190 @@
+---
+layout: default
+title: Opening A Window
+next_page: [/guide/intro/chapter-3, Surfaces And Positional Datatypes]
+---
+
+<body>
+    <p>In this article, we'll go over how to get a basic window running.</p>
+
+    <h2>Table of contents</h2>
+    <p>
+      <ol id="toc">
+        <!--
+          To be filled by javascript
+        -->
+      </ol>
+    </p>
+
+
+    <h2><a id="setup" class="js">Setup</a></h2>
+    <p>
+        Create a file, for the purposes of this article I'll be calling it <code>main.py</code>.
+        Avoid calling it <code>pygame.py</code> as that would result in a circular import error.
+    </p>
+    <p>
+      Now obviously, the first thing to do is to import the library
+{% highlight python %}
+import pygame
+{% endhighlight %}
+    </p>
+    <p>
+      As a general practice, we generally initialize pygame before using it. This enables the use of
+      audio, fonts, and other cool stuff that we don't have to remember to initialize individually
+{% highlight python %}
+import pygame
+
+pygame.init()
+{% endhighlight %}
+    </p>
+
+    <p>
+      Now here comes the interesting stuff, 
+      we're gonna spawn a window!
+{% highlight python %}
+import pygame
+
+pygame.init()
+pygame.display.set_mode(size=(500, 500))
+{% endhighlight %}
+
+You probably didn't see it, but that opened a 500x500 (width x height) window
+and closed since the program terminated. 
+</p>
+<p>
+In order to keep the window open, the Python process needs to be running. 
+Let's make a while loop to keep it running
+<br><u><b>CAUTION</b></u>: Make sure you know how to end your Python program forcefully, as the Window will be unresponsive</b>.
+If you're running this from a terminal, using CTRL+C or CTRL+SHIFT+C will do
+{% highlight python %}
+import pygame
+
+pygame.init()
+pygame.display.set_mode(size=(500, 500))
+
+while True:
+    pass
+{% endhighlight %}
+    </p>
+
+    <p>
+      Great! Now we've got a black window running, but it's unresponsive. Let's fix that, shall we?
+{% highlight python %}
+import pygame
+
+pygame.init()
+pygame.display.set_mode(size=(500, 500))
+
+while True:
+    events = pygame.event.get()
+    for event in events:
+        pass 
+{% endhighlight %}
+      <br><code>events = pygame.event.get()</code>: Here, we're requesting
+      the events that happened since the previous time <code>pygame.event.get</code> was called. 
+      So any keypress, mouse input or touch input was recorded here.
+      <br>
+      <br>In this case, we want to loop over these events and check if the user pressed the X button.
+      More precisely, this checks for the <a href="https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html#index-SIGTERM">SIGTERM</a>
+      signal from your operating system which is what the X button sends
+{% highlight python %}
+import pygame
+
+pygame.init()
+pygame.display.set_mode(size=(500, 500))
+
+while True:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            pass
+{% endhighlight %}
+      <br><code>if event.type == pygame.QUIT</code>:
+      So the <code>.type</code> attribute of each event is how we determine 
+      what the type of each event is. This maps to an integer constant and is usually compared with a named constant 
+      within pygame like <code>.QUIT</code>
+
+{% highlight python %}
+import pygame
+
+pygame.init()
+pygame.display.set_mode(size=(500, 500))
+
+while True:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            raise SystemExit 
+{% endhighlight %}
+      <br><code>raise SystemExit</code>: Well, this is pretty self explanatory.
+      This simply raises a system exit, which terminates the Python program, and as we know - 
+      that causes the window to close
+    </p>
+    <br>
+    <p>
+      Now what if we want to draw something onto the window?
+      <br>In order to do that, let's first get the display <a href="https://pyga.me/docs/ref/surface.html">Surface</a>. 
+      <br>A surface is basically a canvas we can draw pixels on, and the display 
+      surface is the main canvas which represents the area on our window.
+    </p>
+    <p>
+      The display surface is returned by the <code>display.set_mode</code> function,
+      let's assign that to a variable.
+{% highlight python %}
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode(size=(500, 500))
+
+while True:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            raise SystemExit
+{% endhighlight %}
+      
+      In pygame, it is common to name this variable 'screen'. Let's go ahead and fill the 
+      display surface, i.e, 'screen' with a color. 
+{% highlight python %}
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode(size=(500, 500))
+
+while True:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            raise SystemExit
+
+    screen.fill("blue")
+{% endhighlight %}
+
+      <code>Surface.fill</code> lets you fill the entire surface/canvas with a color of your choice.
+    </p>
+
+    <p>
+      But hey, this didn't do anything? The window is still black! 
+      <br>The reason for this is that we need to tell the window to update itself each time we draw
+      something onto it. We can do that with <code>pygame.display.flip()</code>
+{% highlight python %}
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode(size=(500, 500))
+
+while True:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            raise SystemExit
+
+    screen.fill("blue")
+    pygame.display.flip()
+{% endhighlight %}
+
+      And voila! We have a perfectly good pygame window running
+    </p>
+    <img src="assets/article/ch_1_blue_window.png">
+
+</body>
